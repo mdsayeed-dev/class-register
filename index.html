@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Class Register | CR Admin Panel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #17233f;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.55), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.55), transparent 25%),
+                linear-gradient(135deg, #d9dfff, #f5d9f2, #d8f3e5);
+        }
+        .top-header {
+            width: calc(100% - 40px);
+            margin: 18px auto 0;
+            min-height: 78px;
+            padding: 15px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 10px 30px rgba(60, 50, 100, 0.08);
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #7b4cff, #5d36d7);
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 6px 15px rgba(100, 70, 230, 0.25);
+        }
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 3px;
+        }
+        .brand p {
+            font-size: 12px;
+            color: #71809d;
+        }
+        .header-text {
+            color: #53617c;
+            font-size: 25x;
+        }
+        .main-container {
+            min-height: calc(100vh - 230px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 45px 20px;
+        }
+        .register-card {
+            width: 100%;
+            max-width: 680px;
+            padding: 48px 55px;
+            background: rgba(255, 255, 255, 0.91);
+            backdrop-filter: blur(18px);
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow:
+                0 25px 60px rgba(70, 60, 120, 0.15),
+                0 2px 8px rgba(70, 60, 120, 0.06);
+        }
+        .register-card h1 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #64718d;
+            font-size: 16px;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 27px 0 35px;
+        }
+        .divider span {
+            width: 35px;
+            height: 3px;
+            background: #e3e5ee;
+            border-radius: 5px;
+        }
+        .divider b {
+            width: 75px;
+            height: 4px;
+            border-radius: 10px;
+            background: linear-gradient(
+                90deg,
+                #7b42ff,
+                #43d99b
+            );
+        }
+        .input-group {
+            margin-bottom: 26px;
+        }
+        .input-group label {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #1d2943;
+        }
+        .label-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 7px;
+            color: #7142ed;
+            background: #f0eaff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            height: 64px;
+            padding: 0 20px;
+            border: 1.5px solid #d9dce7;
+            border-radius: 13px;
+            outline: none;
+            background: white;
+            color: #1c2942;
+            font-size: 16px;
+            transition: all 0.25s ease;
+        }
+        .input-group input::placeholder {
+            color: #98a1b4;
+        }
+        .input-group input:focus {
+            border-color: #8a5cff;
+            box-shadow:
+                0 0 0 4px rgba(123, 66, 255, 0.10);
+            transform: translateY(-1px);
+        }
+        input[type="submit"] {
+            width: 100%;
+            height: 66px;
+            margin-top: 7px;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(
+                100deg,
+                #7040f5,
+                #4d9ee8,
+                #43d491
+            );
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow:
+                0 10px 22px rgba(83, 70, 220, 0.22);
+            transition: all 0.25s ease;
+        }
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 14px 28px rgba(83, 70, 220, 0.28);
+        }
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+        .register-note {
+            text-align: center;
+            margin-top: 27px;
+            color: #63718d;
+            font-size: 22px;
+        }
+        .footer {
+            width: calc(100% - 40px);
+            min-height: 95px;
+            margin: 0 auto 18px;
+            padding: 20px 35px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(15px);
+            box-shadow:
+                0 10px 30px rgba(60, 50, 100, 0.07);
+        }
+        .footer-icon {
+            font-size: 32px;
+        }
+        .footer strong {
+            font-size: 25px;
+        }
+        .footer p {
+            margin-top: 5px;
+            color: #73809a;
+            font-size: 20px;
+        }
+        .footer-users {
+            margin-left: auto;
+            font-size: 32px;
+        }
+        @media (max-width: 700px) {
+            .top-header {
+                width: calc(100% - 24px);
+                padding: 13px 16px;
+                border-radius: 15px;
+            }
+            .header-text {
+                display: none;
+                font-size: 25px;
+            }
+            .brand h2 {
+                font-size: 18px;
+            }
+            .main-container {
+                padding: 25px 12px;
+            }
+            .register-card {
+                padding: 35px 22px;
+                border-radius: 22px;
+            }
+            .register-card h1 {
+                font-size: 30px;
+            }
+            .subtitle {
+                font-size: 14px;
+            }
+            .input-group input {
+                height: 58px;
+            }
+            input[type="submit"] {
+                height: 60px;
+            }
+            .footer {
+                width: calc(100% - 24px);
+                padding: 18px;
+                margin-bottom: 12px;
+            }
+            .footer-users {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand">
+            <div class="brand-icon">
+                @
+            </div>
+            <div>
+                <h2>Class Register</h2>
+                <p>Student Information</p>
+            </div>
+        </div>
+        <div class="header-text">
+            ~ Building a complete class record
+        </div>
+    </header>
+    <main class="main-container">
+        <div class="register-card">
+            <div class="main-icon">
+                </div>
+            <h1>
+                Student Registeration
+            </h1>
+            <p class="subtitle">
+                Enter your details below to get registered
+            </p>
+            <div class="divider">
+                </div>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="name">
+                        <span class="label-icon">
+                            #
+                        </span>
+                        Full Name
+                    </label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+                <div class="input-group">
+                    <label for="roll_no">
+                        <span class="label-icon">
+                            #
+                        </span>
+                        Roll Number
+                    </label>
+                    <input
+                        type="text"
+                        id="roll_no"
+                        name="roll_no"
+                        placeholder="Enter your roll number"
+                        required
+                    >
+                </div>
+                <input
+                    type="submit"
+                    value="➤  Submit"
+                >
+            </form>
+            <div class="register-note">
+                 Each roll number can be registered only once.
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-icon">
+        </div>
+        <div>
+            <strong>
+               # Thank you for helping us maintain an accurate class register.
+            </strong>
+            <p>
+               & Your cooperation is appreciated!
+            </p>
+        </div>
+        <div class="footer-users">
+         </div>
+    </footer>
+    <script>
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbzVn3-MvqA-gL_xXQhH_uKgaqB4hdPQP6lJbCkpDxfXjS1n8qLR1ydIbXB6DqCrUlyOmg/exec";
+
+const form = document.getElementById("registerForm");
+
+form.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const roll = document.getElementById("roll_no").value.trim();
+
+    if (!name || !roll) {
+        alert("Please enter your Name and Roll Number.");
+        return;
+    }
+
+    const submitButton = form.querySelector('input[type="submit"]');
+
+    submitButton.disabled = true;
+    submitButton.value = "Submitting...";
+
+    try {
+
+        const response = await fetch(scriptURL, {
+
+            method: "POST",
+
+            body: JSON.stringify({
+                name: name,
+                roll_no: roll
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            alert("Registration successful! ✅");
+
+            form.reset();
+
+        } else {
+
+            alert("⚠️ " + result.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Something went wrong. Please try again.");
+
+    }
+
+    submitButton.disabled = false;
+    submitButton.value = "➤  Submit";
+
+});
+
+</script>
+</body>
+</html>
