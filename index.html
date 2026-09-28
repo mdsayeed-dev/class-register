@@ -367,12 +367,26 @@ form.addEventListener("submit", async function(e) {
     const roll = document.getElementById("roll_no").value.trim();
 
     if (!name || !roll) {
-        alert("Please enter your Name and Roll Number.");
-        return;
-    }
+    alert("Please enter your Name and Roll Number.");
+    return;
+}
 
-    const submitButton = form.querySelector('input[type="submit"]');
+if (name.length > 100) {
+    alert("Name is too long.");
+    return;
+}
 
+if (roll.length > 30) {
+    alert("Invalid roll number.");
+    return;
+}
+
+if (!/^[A-Za-z0-9\/\-_ ]+$/.test(roll)) {
+    alert("Invalid roll number.");
+    return;
+}
+
+const submitButton = form.querySelector('input[type="submit"]');
     submitButton.disabled = true;
     submitButton.value = "Submitting...";
 
